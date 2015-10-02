@@ -1,0 +1,28 @@
+To start the application , need to start three different things:
+	1)Start the MongoDB server
+		Steps:
+		======
+			i) Navigate to the bin folder in the Mongo directory.(eg:E:\MK\------\Mongo\MongoDB\bin).
+			ii)Make sure "data\db" is present(E:\MK\------\Mongo\MongoDB\data\db) , if not create it.
+			iii)Type the following command ----> mongod --dbpath"E:\MK\------\Mongo\MongoDB\data\db".
+			iv)Now thw MongoDB server is started.
+			v)Open a new shell and Navigate to the "bin folder"(eg:E:\MK\------\Mongo\MongoDB\bin).
+			vi)Type "mongo" , we have the client started,and we are good to go :).
+
+	2)Start the Scout app
+		Steps:
+		======
+			i)Scout is used for compiling the scss files.
+			ii)By this process , the scss files are converted into CSS files.
+			iii)To do so , Start the Scout app.
+			iv)Configure the project , bye giving the details of the project's "scss"folder(input folder) and "css" folder, where the compiled css files resides.
+			v)If some error comes while configuring the scout app, make sure the java path in the scout's "process_interaction.js" is configured correctly.Navigation ---> "C:\Program Files\Scout\javascripts\app".
+			vi)When everything is configured, the scout app starts :).
+
+	3)Finally start the Express Server
+		Steps:
+		======
+			i)To start navigate to the required project.(eg:"E:\MK\------\projects\Passport").
+			ii)Make sure u r performing  1 and 2 before this step.
+			iii)enter "nodemon".
+			iv)Project starts and we are good to go :).

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='EntryPageForPostApp'>
+	<head>
+		<title>Login To JustPost!!</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<style type="text/css">
+			.login,.signUp {
+				background-color: #EDEDED;
+				position:relative;
+				max-width: 330px;
+				margin: 0 auto;
+				padding: 15px;
+			}
+			.login-Form input.ng-invalid.ng-touched {
+			    border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container" ng-controller="postCtrl">
+			<div class="login" ng-hide="loginVisible" ng-style="myStyle" style="height:232px;">
+				<form novalidate name="loginForm" class="login-Form">
+				 	<div class="form-group">
+						<input type="email" class="form-control" id="loginEmailAddress" placeholder="Enter Email" name="username" ng-model="login.useremail" required>
+					</div>
+				 	<div class="form-group">
+				    	<input type="password" class="form-control" id="loginPassword" placeholder="Password" name="password" ng-model="login.password" required>
+				  	</div>
+				  	<div class="loginError" ng-hide="loginErrorVisible" style="color:#800000;">
+				  		The email or password you entered is incorrect.
+				  	</div>
+				  	<button type="submit" class="btn btn-primary" ng-click="validateLogin()" ng-disabled="loginForm.$invalid">LogIn</button>
+				  	<h5 style="color:black;">Or</h5>
+				  	<button type="submit" class="btn btn-primary" ng-click="showSignUpForm()">SignUp</button>
+			 	</form>
+			</div>
+			<div class="signUp" ng-hide="signUpVisible" ng-style="signupStyle">
+				<form novalidate name="signUpForm" class="signUpForm">
+					<div class="form-group">
+						<input type="text" class="form-control" id="signUpUserName" placeholder="Enter Username" ng-model="signup.username" required>
+					</div>
+	 				<div class="form-group">
+					    <input type="email" class="form-control" id="signUpEmailAddress" placeholder="Enter Email" ng-model="signup.email" required>
+				  	</div>
+	 				<div class="form-group">
+	    				<input type="password" class="form-control" id="signUpPassword" placeholder="Password" ng-model="signup.password" required>
+	  				</div>
+	  				<div class="signupError" ng-hide="sameEmailErrorVisible" style="color:#800000;">
+				  		This email is already available...
+				  	</div>
+	  				<button type="submit" class="btn btn-primary" ng-click="validateSignUp()" ng-disabled="signUpForm.$invalid">SignUp</button>
+	  				<h5 style="color:black;">Or</h5>
+	  				<button type="submit" class="btn btn-primary" ng-click="showLoginForm()">Login</button>
+ 				</form>
+			</div>
+   	 	</div>
+   	 	<script type="text/javascript" src ="/bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src ="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+   	 	<script type="text/javascript">
+   	 		var app = angular.module('EntryPageForPostApp',[]);
+   	 		app.controller('postCtrl',function ($scope,$http,$window) {
+
+   	 			$scope.signUpVisible = true;
+				$scope.loginVisible = false;
+				$scope.loginErrorVisible = true;
+				$scope.sameEmailErrorVisible = true;
+
+				$scope.showLoginForm = function (){
+					$scope.signUpVisible = true;
+					$scope.loginVisible =false;
+				}
+
+				$scope.showSignUpForm = function () {
+					$scope.loginVisible = true;
+					$scope.signUpVisible = false;
+				}
+
+				$scope.validateLogin = function (){
+					$scope.loginErrorVisible = true;
+					$http.post('/login',{username:$scope.login.useremail,
+					password:$scope.login.password}).
+					success(function (data, status, headers, config){
+						console.log("The validation comes here too....");
+						console.log(data);
+						console.log(status);
+						console.log(headers);
+						console.log(config);
+
+						var userAuthDetais  = {};
+						userAuthDetais.token = data.token;
+						userAuthDetais.username = data.name;
+						userAuthDetais.useremail = data.email;
+						
+						$window.localStorage.setItem('userAuthInfo',JSON.stringify(userAuthDetais));
+						$window.location.href = '/home';
+					}).error(function (data, status, headers, config){
+						console.log("Not a valid user...");
+						$scope.loginErrorVisible = false;
+						$scope.myStyle = {'height':'270px'};
+					});
+				};
+
+				$scope.validateSignUp = function (){
+					$scope.sameEmailErrorVisible = true;
+					$http.post('/signUp',{username:$scope.signup.username,password:$scope.signup.password,useremail:$scope.signup.email}).
+					success(function (data,status,headers,config){
+						console.log("signup was successfull");
+						console.log(data);
+						console.log(status);
+						console.log(headers);
+						console.log(config);
+
+						var userAuthDetais  = {};
+						userAuthDetais.token = data.token;
+						userAuthDetais.username = data.name;
+						userAuthDetais.useremail = data.email;
+						$window.localStorage.setItem('userAuthInfo',JSON.stringify(userAuthDetais));
+
+						$window.location.href = '/home';
+					}).error(function (data,status,headers,config){
+						console.log("Signup was not successfull");
+						
+						console.log(data);
+						console.log(status);
+						console.log(headers);
+						console.log(config);
+
+						$scope.sameEmailErrorVisible = false;
+						$scope.signupStyle = {'height':'300px'};
+					});
+				};
+	   	 	});
+		</script>
+	</body>
+</html>

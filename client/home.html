@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Post">
+	<head>
+		<title>JustPost!!</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+	</head>
+	<body>
+		<div ng-controller="mainController">
+			<nav class="navbar navbar-default navbar-fixed-top container">
+		      	<div class="container">
+		        	<div class="navbar-header">
+		          		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			            	<span class="sr-only">Toggle navigation</span>
+			            	<span class="icon-bar"></span>
+			            	<span class="icon-bar"></span>
+			            	<span class="icon-bar"></span>
+		          		</button>
+		          		<a class="navbar-brand" href="#/"><strong>Post</strong></a>
+		        	</div>
+		        	<div id="navbar" class="collapse navbar-collapse">
+		        		<ul class="nav navbar-nav">
+			            	<li><a href="#/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Home</a></li>
+			            	<li><a href="#/createPost"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;CreatePost</a></li>
+			          	</ul>
+			          	<ul class="nav navbar-nav navbar-right">
+			          		<li><a href="/logout" ng-click="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Logout</a></li>
+			          	</ul>
+			          	<ul class="nav navbar-nav navbar-right">
+			            	<li><a href="#/accountSettings"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;{{username}}</a></li>
+			          	</ul>
+		        	</div>
+		     	</div>
+    		</nav>
+    		<div class="container">
+    			<ng-view></ng-view>
+    		</div>
+		</div>
+		<script type="text/javascript" src ="/bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src ="/bower_components/angular-resource/angular-resource.js"></script>
+		<script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+		<script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src ="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script type="text/javascript" src="/js/app.js"></script>
+		<script type="text/javascript" src="/js/services/postAppService.js"></script>
+		<script type="text/javascript" src="/js/services/postRESTFactory.js"></script>
+		<script type="text/javascript" src="/js/services/request_response_Interceptors.js"></script>
+		<script type="text/javascript" src="/js/directives/postDirective.js"></script>
+		<script type="text/javascript" src="/js/controllers/homeController.js"></script>
+		<script type="text/javascript" src="/js/controllers/createPostController.js"></script>
+		<script type="text/javascript" src="/js/controllers/viewPostController.js"></script>
+		<script type="text/javascript" src="/js/controllers/accountSettingsController.js"></script>
+		<script type="text/javascript" src="/js/controllers/editPostController.js"></script>
+	</body>
+</html>

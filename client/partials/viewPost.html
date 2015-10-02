@@ -1,0 +1,16 @@
+<div class="container">
+	<div id="viewAreaForPostContent">
+		<div class="view" style="background-color: #EDEDED;position:relative;max-width: 330px;margin: 0 auto;padding: 15px;text-align:center">
+			<label class="heading viewProperties">{{post.postTitle}}</label>
+		</div>
+		<br/>
+		<div class="view" style="background-color: #EDEDED;position:relative;max-width: 330px;margin: 0 auto;padding: 15px;text-align:center">
+			<label class="contentOfPost viewProperties">{{post.post}}</label>
+		</div>
+		<div class="view" style="position:relative;max-width: 330px;margin: 0 auto;padding: 15px;">
+			<a class="viewProperties" href="#/editPost/{{post._id}}">Edit</a>
+			<button style="margin-left:10px;" class="btn btn-primary viewProperties" ng-click="deletePost(post._id)">Delete</button>
+			<a style="margin-left:10px;" class="viewProperties" href="#/">Back</a>
+		</div>
+	</div>
+</div>
